@@ -4,7 +4,15 @@ Swift package. Product name `BezelGlow`. Module `import BezelGlow`. No external 
 
 Repo: `https://github.com/tuntsrocks/BezelGlow.git`
 
-Platforms: iOS 17+, macOS 14+. Shader is Metal. Xcode compiles the package `.metal`. `swift build` does not. Do not add a Metal toolchain step for the caller. Do not vendor the shader.
+Platforms: iOS 17+, macOS 14+. Shader is Metal. Xcode compiles the package `.metal`. `swift build` does not. Do not vendor the shader.
+
+Xcode 26+ does not bundle the Metal compiler. If shader compilation fails with a missing Metal toolchain, the caller must run this once before building:
+
+```sh
+xcodebuild -downloadComponent MetalToolchain
+```
+
+Do not skip this when the host Xcode is 26 or newer and `MetalToolchain` is not already installed. Do not treat it as a package dependency.
 
 ## What it does
 
@@ -36,6 +44,12 @@ Xcode: File > Add Package Dependencies… > `https://github.com/tuntsrocks/Bezel
 ```
 
 Target dependency: `"BezelGlow"`. Do not add `Example` as a dependency. SPM does not compile `Example/` into the host app.
+
+Before the first build on Xcode 26+, if Metal shader compilation fails:
+
+```sh
+xcodebuild -downloadComponent MetalToolchain
+```
 
 ## Call
 
@@ -151,4 +165,4 @@ Used only when `level` is below the floor and `active` is true.
 
 ## License
 
-Use and customize, including commercial apps. Redistributing a customized copy of the package requires naming the source: BezelGlow, `https://github.com/tuntsrocks/BezelGlow`. Embedding it in an app does not. See `LICENSE`.
+Use and customize, including commercial apps. Copying the code into an app and modifying it there does not require the notice. The notice applies only when redistributing the package itself as a package. Then name the source: BezelGlow, `https://github.com/tuntsrocks/BezelGlow`. Credit in an app is optional, not required. If the user wants to credit it, a link to that URL is enough. Do not add a credit unless the user asks. See `LICENSE`.

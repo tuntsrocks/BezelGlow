@@ -5,14 +5,19 @@ Copyright (c) 2026 BezelGlow
 You may use, copy, and customize this software, including for commercial use,
 without paying a fee.
 
-If you customize this software and redistribute that customized version, you
-must state the source it came from: BezelGlow,
+Copying this software into your own app and changing it there is allowed.
+Your app is not this package. That use does not require this notice, even if
+you modify the copied code.
+
+The notice applies only when this package is the thing being redistributed:
+the library itself, as a package, repository, or other standalone distribution.
+If you customize this package and redistribute that package, you must state
+the source it came from: BezelGlow,
 https://github.com/tuntsrocks/BezelGlow
 
-Using it inside your own app, without redistributing the customized package
-itself, does not require that notice.
-
-This notice must stay with any copy or substantial portion of the software.
+If you use BezelGlow in an app, credit is not required. It is still
+appreciated. A link to https://github.com/tuntsrocks/BezelGlow in an about
+screen, credits page, or documentation is enough.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

@@ -10,6 +10,12 @@ It is a Swift package. It has no external dependencies. It does not open the mic
 
 iOS 17+ and macOS 14+. The shader is Metal. Xcode compiles the package `.metal` file. Command-line `swift build` does not compile Metal.
 
+Xcode 26 and later do not ship the Metal compiler inside Xcode. If the package fails to compile the shader, install that component once:
+
+```sh
+xcodebuild -downloadComponent MetalToolchain
+```
+
 <img src="docs/glow-example.png" alt="Example lab" width="560">
 
 Photos and videos live in [`docs/`](docs/). Open that folder to see each file.
@@ -49,6 +55,12 @@ In the destination app:
 1. File > Add Package Dependencies…
 2. Paste `https://github.com/tuntsrocks/BezelGlow.git`
 3. Add the `BezelGlow` product.
+
+On Xcode 26+, the Metal compiler is a separate download. Without it, the package `.metal` file does not compile:
+
+```sh
+xcodebuild -downloadComponent MetalToolchain
+```
 
 In `Package.swift`:
 
@@ -196,4 +208,6 @@ Sound your app plays: on the `AVAudioEngine` output tap, or on the player meter,
 
 ## License
 
-Use it and customize it, including in commercial apps. If you customize the package and redistribute that version, name the source: BezelGlow. Using it inside your own app does not require that notice. See [LICENSE](LICENSE).
+Use it and customize it, including in commercial apps. Copying it into your app and changing it there does not require this notice. The notice applies only if you redistribute the package itself, customized or not: name the source as BezelGlow. See [LICENSE](LICENSE).
+
+Credit is not required when you use it in an app. A link to the repository is still appreciated: https://github.com/tuntsrocks/BezelGlow
