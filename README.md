@@ -10,7 +10,7 @@ It is a Swift package. It has no external dependencies. It does not open the mic
 
 iOS 17+ and macOS 14+. The shader is Metal. Xcode compiles the package `.metal` file. Command-line `swift build` does not compile Metal.
 
-![Example lab](docs/glow-example.png)
+<img src="docs/glow-example.png" alt="Example lab" width="560">
 
 Photos and videos live in [`docs/`](docs/). Open that folder to see each file.
 
@@ -18,15 +18,15 @@ Photos and videos live in [`docs/`](docs/). Open that folder to see each file.
 
 On black, with the wave on:
 
-![Styles on black](docs/glow-mosaic.png)
+<img src="docs/glow-mosaic.png" alt="Styles on black" width="680">
 
 On black, with the wave off:
 
-![Styles without the wave](docs/glow-mosaic-still.png)
+<img src="docs/glow-mosaic-still.png" alt="Styles without the wave" width="680">
 
 On white, painted over the background. `.light` disappears there, so these use `.over`:
 
-![Styles on white](docs/glow-mosaic-white.png)
+<img src="docs/glow-mosaic-white.png" alt="Styles on white" width="680">
 
 Videos, also in [`docs/`](docs/):
 
