@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Install Metal compiler
+        run: xcodebuild -downloadComponent MetalToolchain
+
+      - name: Test package on macOS
+        run: >-
+          xcodebuild test
+          -scheme BezelGlow
+          -destination 'platform=macOS'
+          -derivedDataPath "$RUNNER_TEMP/BezelGlow-tests"
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: Build example for iOS Simulator
+        run: >-
+          xcodebuild build
+          -project Example/GlowExample.xcodeproj
+          -scheme GlowExample
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath "$RUNNER_TEMP/BezelGlow-example"
+          CODE_SIGNING_ALLOWED=NO
