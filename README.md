@@ -132,6 +132,10 @@ Attack and release are already in the package, so a jumpy meter still reads as l
 
 Open it on an iPhone or the Simulator.
 
+For a physical iPhone, select your own development team in the example target's
+**Signing & Capabilities** settings. No signing team is stored in the project.
+Simulator builds do not need a development team.
+
 The screen is a lab. Change the sides, the colors, and the sliders. The current Swift call is shown below them. Tap **Copy call** and paste it into your app.
 
 **Manual** moves the glow without a microphone. Use it to preview a sound your app already plays: you measure the volume and pass it as `level`.
@@ -205,6 +209,15 @@ view.bezelGlowScreen(.bottom, level: level, active: listening)
 ```
 
 Sound your app plays: on the `AVAudioEngine` output tap, or on the player meter, compute the same RMS and pass it as `level`.
+
+## Contributing and support
+
+Build and test instructions are in [CONTRIBUTING.md](CONTRIBUTING.md). Use
+[GitHub issues](https://github.com/tuntsrocks/BezelGlow/issues) for bugs and questions.
+Jouy ([@CosmicSnow](https://github.com/CosmicSnow)) is the original author.
+
+For vulnerabilities, follow [SECURITY.md](SECURITY.md) and report privately.
+Participation follows the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## License
 

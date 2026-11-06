@@ -3,9 +3,28 @@ import XCTest
 
 final class GlowEnvelopeTests: XCTestCase {
     func testAttackRisesTowardTarget() {
-        let next = GlowEnvelope.step(current: 0, target: 1, deltaTime: 0.18, attack: 0.18, release: 0.6)
+        var next = 0.0
+        // The follower caps each frame at 0.05 seconds. Simulate 0.18 seconds
+        // of normal frames rather than treating it as one stalled frame.
+        for _ in 0..<18 {
+            next = GlowEnvelope.step(current: next, target: 1, deltaTime: 0.01, attack: 0.18, release: 0.6)
+        }
         XCTAssertGreaterThan(next, 0.5)
         XCTAssertLessThan(next, 1)
+    }
+
+    func testStalledFrameIsCapped() {
+        let normal = GlowEnvelope.step(current: 0, target: 1, deltaTime: 0.05)
+        let stalled = GlowEnvelope.step(current: 0, target: 1, deltaTime: 10)
+        XCTAssertEqual(stalled, normal, accuracy: 0.000_001)
+        XCTAssertEqual(stalled, 1 - exp(-0.05 / 0.18), accuracy: 0.000_001)
+    }
+
+    func testNonpositiveDeltaTimeDoesNotAdvance() {
+        for deltaTime in [0.0, -1.0] {
+            let next = GlowEnvelope.step(current: 0.4, target: 1, deltaTime: deltaTime)
+            XCTAssertEqual(next, 0.4)
+        }
     }
 
     func testReleaseFallsSlowerThanAttack() {
